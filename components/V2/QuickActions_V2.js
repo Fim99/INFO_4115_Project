@@ -25,12 +25,16 @@ const QuickActions = () => {
 
   const getRandomHourDateTime = () => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const randomDay = days[Math.floor(Math.random() * days.length)];
-    const randomHour = Math.floor(Math.random() * 12) + 1;
+    const randomMonth = months[Math.floor(Math.random() * months.length)];
+    const randomDate = Math.floor(Math.random() * 28) + 1; 
+    const randomHour = Math.floor(Math.random() * 12) + 1; 
     const randomMinutes = "00";
-    const randomAMPM = Math.random() < 0.5 ? "AM" : "PM";
-    return `${randomDay}, ${randomHour}:${randomMinutes} ${randomAMPM}`;
+    const randomAMPM = Math.random() < 0.5 ? "AM" : "PM"; 
+    return `${randomDay}, ${randomMonth} ${randomDate} \n${randomHour}:${randomMinutes} ${randomAMPM}`;
   };
+  
 
   const handleSchedulePress = () => {
     setScheduledTime(getRandomHourDateTime());

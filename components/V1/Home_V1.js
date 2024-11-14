@@ -52,7 +52,7 @@ const HomeScreen = () => {
 
         {/* Next Schedule */}
         <View style={styles.scheduleContainer}>
-          <Text style={styles.scheduleText}>Next Scheduled At:{'\n'} {nextSchedule}</Text>
+          <Text style={styles.scheduleText}>Next Scheduled:{'\n'} {nextSchedule}</Text>
         </View>
 
         {/* Action Buttons */}

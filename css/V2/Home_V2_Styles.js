@@ -73,6 +73,14 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   },
+  dateText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  
 });
 
 export default styles;

@@ -4,14 +4,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Main from './components/Main';
 {/* Version 1 */}
 import Home_V1 from './components/V1/Home_V1';
+import QuickActions_V1 from './components/V1/QuickActions_V1';
+import MoreControls_V1 from './components/V1/MoreControls_V1';
 import TempFan_V1 from './components/V1/TempFan_V1';
 import Scheduling_V1 from './components/V1/Scheduling_V1';
 import Energy_V1 from './components/V1/Energy_V1';
-import QuickActions_V1 from './components/V1/QuickActions_V1';
-import MoreControls_V1 from './components/V1/MoreControls_V1';
 {/* Version 2 */}
 import Home_V2 from './components/V2/Home_V2';
 import QuickActions_V2 from './components/V2/QuickActions_V2';
+import MoreControls_V2 from './components/V2/MoreControls_V2';
+import TempFan_V2 from './components/V2/TempFan_V2';
+import Scheduling_V2 from './components/V2/Scheduling_V2';
+
 
 const Stack = createStackNavigator();
 
@@ -30,6 +34,9 @@ export default function App() {
         {/* Version 2 */}
         <Stack.Screen name="Home_V2" component={Home_V2} />
         <Stack.Screen name="QuickActions_V2" component={QuickActions_V2} />
+        <Stack.Screen name="MoreControls_V2" component={MoreControls_V2} />
+        <Stack.Screen name="TempFan_V2" component={TempFan_V2 }/>
+        <Stack.Screen name="Scheduling_V2" component={Scheduling_V2} />
       </Stack.Navigator>
     </NavigationContainer>
   );

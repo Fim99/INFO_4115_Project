@@ -1,66 +1,185 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#E6F3FF",
+    backgroundColor: '#E6F3FF',
     padding: 16,
   },
-  topBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    marginBottom: 20,
-    marginTop: 20,
+  nextScheduleContainer: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#CDDDE2',
   },
   nextScheduleText: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#2196F3',
+    fontWeight: '600',
   },
-  addButton: {
-    backgroundColor: "#23C4FF",
-    width: 50,
-    height: 50,
-    borderRadius: 24,
-    alignItems: "center",
-    justifyContent: "center",
+  calendar: {
+    borderRadius: 10,
+    elevation: 4,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#CDDDE2',
   },
-  addButtonText: {
-    color: "#fff",
-    fontSize: 24,
-    fontWeight: "bold",
+  addBar: {
+    backgroundColor: '#23C4FF',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#CDDDE2',
+  },
+  addBarText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  schedulesList: {
+    flex: 1,
+  },
+  scheduleItem: {
+    flexDirection: 'row',
+    backgroundColor: '#f5f5f5',
+    padding: 15,
+    borderRadius: 8,
+    marginBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    borderWidth: 1,
+    borderColor: '#CDDDE2',
+  },
+  scheduleInfo: {
+    flex: 1,
+  },
+  scheduleTime: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  scheduleDate: {
+    fontSize: 14,
+    color: '#666',
+  },
+  deleteButton: {
+    backgroundColor: '#ff4444',
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 10,
   },
   deleteButtonText: {
-    color: "#ffffff",
+    color: '#fff',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: '600',
   },
-  eventList: {
-    flexGrow: 1,
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    borderWidth: 1,
+    borderColor: '#CDDDE2',
   },
-  eventBox: {
-    backgroundColor: "#23C4FF",
-    padding: 16,
+  modalContent: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 20,
+    width: '90%',
+    maxWidth: 400,
+  },
+  modalTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  timeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  timeInputContainer: {
+    alignItems: 'center',
+  },
+  timeInput: {
+    borderWidth: 1,
+    borderColor: '#CDDDE2',
     borderRadius: 8,
-    marginVertical: 8,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    padding: 8,
+    width: 60,
+    textAlign: 'center',
+    marginHorizontal: 5,
   },
-  eventTime: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#fff",
+  timeSeparator: {
+    fontSize: 24,
+    marginHorizontal: 5,
+    marginVertical: 15,
   },
-  eventDetail: {
-    fontSize: 14,
-    color: "#fff",
+  ampmButton: {
+    backgroundColor: '#2196F3',
+    padding: 8,
+    borderRadius: 8,
+    marginLeft: 10,
+    width: 60,
   },
-  eventTemperature: {
+  ampmButtonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: '600',
+  },
+  inputContainer: {
+    marginBottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  inputLabel: {
+    fontSize: 16,
+    flex: 1,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#CDDDE2',
+    borderRadius: 8,
+    padding: 8,
+    width: 100,
+    textAlign: 'center',
+  },
+  modalButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 20,
+  },
+  modalButton: {
+    flex: 1,
+    padding: 15,
+    borderRadius: 8,
+    marginHorizontal: 5,
+  },
+  cancelButton: {
+    backgroundColor: '#ff4444',
+  },
+  submitButton: {
+    backgroundColor: '#2196F3',
+  },
+  modalButtonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: '600',
+  },
+  warningText: {
+    color: '#ff4444',
     fontSize: 14,
-    color: "#fff",
+    lineHeight: 20,
   },
 });
-
-export default styles;

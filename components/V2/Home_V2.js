@@ -17,8 +17,9 @@ const getRandomHourDateTime = () => {
   const randomDate = Math.floor(Math.random() * 28) + 1;
   const randomHour = Math.floor(Math.random() * 12) + 1;
   const randomAMPM = Math.floor(Math.random() * 2) === 0 ? "AM" : "PM";
-  return `${randomDay}, ${randomHour}:00 ${randomAMPM}`;
+  return `${randomDay}, ${randomMonth} ${randomDate}, ${randomHour}:00 ${randomAMPM}`;
 };
+
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -80,7 +81,7 @@ const HomeScreen = () => {
         </View>
         
         <View style={styles.scheduleBox}>
-          <Text style={styles.infoText}>Next Scheduled At:{'\n'}{nextSchedule}</Text>
+          <Text style={styles.infoText}>Next Scheduled:{'\n'}{nextSchedule}</Text>
         </View>
       </View>
     </SafeAreaView>
