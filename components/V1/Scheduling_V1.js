@@ -1,13 +1,15 @@
 import React, { useState, useMemo } from 'react';
-import {Text, View, TouchableOpacity, ScrollView, Modal, TextInput, Switch} from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, Modal, Switch } from 'react-native';
 import { Calendar } from 'react-native-calendars';
+import ScrollPicker from 'react-native-wheel-scrollview-picker';
 import RefreshButton from '../Refresh_Button';
 import styles from '../../css/V1/Scheduling_V1_Styles';
 
-const SmartACSchedulingV2 = () => {
-  // State for scheduled events
+const SmartACSchedulingV1 = () => {
+  // Modified state to include unique IDs for each event
   const [scheduledEvents, setScheduledEvents] = useState([
     { 
+      id: '1', // Added unique ID
       date: '2024-11-14',
       time: '09:00 AM',
       temperature: 22,
@@ -17,11 +19,17 @@ const SmartACSchedulingV2 = () => {
   
   const [selectedDate, setSelectedDate] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const [hour, setHour] = useState('12');
-  const [minute, setMinute] = useState('00');
-  const [ampm, setAmPm] = useState('AM');
-  const [temperature, setTemperature] = useState('22');
+  const [hourIndex, setHourIndex] = useState(11);
+  const [minuteIndex, setMinuteIndex] = useState(0);
+  const [ampmIndex, setAmpmIndex] = useState(0);
+  const [temperatureIndex, setTemperatureIndex] = useState(6);
   const [repeated, setRepeated] = useState(false);
+
+  // Data for pickers
+  const hours = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0'));
+  const minutes = Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0'));
+  const ampmOptions = ['AM', 'PM'];
+  const temperatures = Array.from({ length: 15 }, (_, i) => `${i + 16}°C`);
 
   // Memoized next scheduled event
   const nextEvent = useMemo(() => {
@@ -65,41 +73,53 @@ const SmartACSchedulingV2 = () => {
     setModalVisible(true);
   };
 
-  const toggleAmPm = () => setAmPm(current => current === 'AM' ? 'PM' : 'AM');
-
   const handleSubmit = () => {
-    const tempNum = parseInt(temperature);
-    const hourNum = parseInt(hour);
-    const minuteNum = parseInt(minute);
-    
-    if (tempNum < 16 || tempNum > 30 || 
-        hourNum < 1 || hourNum > 12 || 
-        minuteNum < 0 || minuteNum > 59) return;
-
-    const formattedTime = `${hour.padStart(2, '0')}:${minute.padStart(2, '0')} ${ampm}`;
+    const formattedTime = `${hours[hourIndex]}:${minutes[minuteIndex]} ${ampmOptions[ampmIndex]}`;
+    const temperature = parseInt(temperatures[temperatureIndex]);
 
     setScheduledEvents(prev => [
       ...prev,
       {
+        id: Date.now().toString(), // Generate unique ID using timestamp
         date: selectedDate,
         time: formattedTime,
-        temperature: tempNum,
+        temperature,
         repeated
       }
     ]);
     
-    // Reset form
-    setHour('12');
-    setMinute('00');
-    setAmPm('AM');
-    setTemperature('22');
+    setHourIndex(11);
+    setMinuteIndex(0);
+    setAmpmIndex(0);
+    setTemperatureIndex(6);
     setRepeated(false);
     setModalVisible(false);
   };
 
-  const handleDeleteSchedule = (index) => {
-    setScheduledEvents(prev => prev.filter((_, i) => i !== index));
+  // Updated delete handler to use event ID instead of index
+  const handleDeleteSchedule = (eventId) => {
+    setScheduledEvents(prev => prev.filter(event => event.id !== eventId));
   };
+
+  const renderScrollPicker = (dataSource, selectedIndex, onValueChange, label) => (
+    <View style={styles.wheelPickerWrapper}>
+      <Text style={styles.pickerLabel}>{label}</Text>
+      <View style={styles.pickerContainer}>
+        <ScrollPicker
+          dataSource={dataSource}
+          selectedIndex={selectedIndex}
+          onValueChange={onValueChange}
+          wrapperHeight={120}
+          wrapperWidth={60}
+          wrapperColor='#FFFFFF'
+          itemHeight={40}
+          highlightColor='#E8E8E8'
+          highlightBorderWidth={1}
+          style={styles.scrollPicker}
+        />
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
@@ -144,57 +164,32 @@ const SmartACSchedulingV2 = () => {
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Add New Schedule</Text>
             
-            <Text style={styles.warningText}>
-              Please make sure your values are in range:{'\n'}
-              - Hour: 1-12{'\n'}
-              - Minute: 00-59{'\n'}
-              - Temperature: 16-30°C
-            </Text>
-            
-            <View style={styles.timeContainer}>
-              <View style={styles.timeInputContainer}>
-                <TextInput
-                  style={styles.timeInput}
-                  value={hour}
-                  onChangeText={setHour}
-                  placeholder="12"
-                  keyboardType="numeric"
-                  maxLength={2}
-                />
-              </View>
+            <View style={styles.timePickersContainer}>
+              {renderScrollPicker(hours, hourIndex, (_, index) => setHourIndex(index), 'Hour')}
               <Text style={styles.timeSeparator}>:</Text>
-              <View style={styles.timeInputContainer}>
-                <TextInput
-                  style={styles.timeInput}
-                  value={minute}
-                  onChangeText={setMinute}
-                  placeholder="00"
-                  keyboardType="numeric"
-                  maxLength={2}
+              {renderScrollPicker(minutes, minuteIndex, (_, index) => setMinuteIndex(index), 'Minute')}
+              {renderScrollPicker(ampmOptions, ampmIndex, (_, index) => setAmpmIndex(index), 'AM/PM')}
+            </View>
+
+            <View style={styles.temperaturePickerContainer}>
+              <Text style={styles.temperatureLabel}>Temperature</Text>
+              <View style={styles.temperaturePickerWrapper}>
+                <ScrollPicker
+                  dataSource={temperatures}
+                  selectedIndex={temperatureIndex}
+                  onValueChange={(_, index) => setTemperatureIndex(index)}
+                  wrapperHeight={120}
+                  wrapperWidth={80}
+                  wrapperColor='#FFFFFF'
+                  itemHeight={40}
+                  highlightColor='#E8E8E8'
+                  highlightBorderWidth={1}
                 />
               </View>
-              <TouchableOpacity 
-                style={styles.ampmButton}
-                onPress={toggleAmPm}
-              >
-                <Text style={styles.ampmButtonText}>{ampm}</Text>
-              </TouchableOpacity>
             </View>
 
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Temperature (°C)</Text>
-              <TextInput
-                style={styles.input}
-                value={temperature}
-                onChangeText={setTemperature}
-                placeholder="22"
-                keyboardType="numeric"
-                maxLength={2}
-              />
-            </View>
-
-            <View style={styles.inputContainer}>
-              <Text style={styles.inputLabel}>Repeat Schedule</Text>
+            <View style={styles.switchContainer}>
+              <Text style={styles.switchLabel}>Repeat Schedule</Text>
               <Switch
                 value={repeated}
                 onValueChange={setRepeated}
@@ -208,13 +203,13 @@ const SmartACSchedulingV2 = () => {
                 style={[styles.modalButton, styles.cancelButton]}
                 onPress={() => setModalVisible(false)}
               >
-                <Text style={styles.modalButtonText}>Cancel</Text>
+                <Text style={styles.buttonText}>Cancel</Text>
               </TouchableOpacity>
               <TouchableOpacity 
                 style={[styles.modalButton, styles.submitButton]}
                 onPress={handleSubmit}
               >
-                <Text style={styles.modalButtonText}>Add</Text>
+                <Text style={styles.buttonText}>Add</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -224,8 +219,8 @@ const SmartACSchedulingV2 = () => {
       <ScrollView style={styles.schedulesList}>
         {scheduledEvents
           .filter(event => !selectedDate || event.date === selectedDate)
-          .map((event, index) => (
-            <View key={index} style={styles.scheduleItem}>
+          .map((event) => (
+            <View key={event.id} style={styles.scheduleItem}>
               <View style={styles.scheduleInfo}>
                 <Text style={styles.scheduleTime}>
                   {event.time} - {event.temperature}°C
@@ -236,7 +231,7 @@ const SmartACSchedulingV2 = () => {
               </View>
               <TouchableOpacity 
                 style={styles.deleteButton}
-                onPress={() => handleDeleteSchedule(index)}
+                onPress={() => handleDeleteSchedule(event.id)}
               >
                 <Text style={styles.deleteButtonText}>✕</Text>
               </TouchableOpacity>
@@ -247,4 +242,4 @@ const SmartACSchedulingV2 = () => {
   );
 };
 
-export default SmartACSchedulingV2;
+export default SmartACSchedulingV1;

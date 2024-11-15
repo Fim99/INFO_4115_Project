@@ -68,7 +68,7 @@ export default StyleSheet.create({
     color: '#666',
   },
   deleteButton: {
-    backgroundColor: '#ff4444',
+    backgroundColor: '#cc3300',
     width: 36,
     height: 36,
     borderRadius: 18,
@@ -86,8 +86,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    borderWidth: 1,
-    borderColor: '#CDDDE2',
   },
   modalContent: {
     backgroundColor: 'white',
@@ -95,6 +93,7 @@ export default StyleSheet.create({
     padding: 20,
     width: '90%',
     maxWidth: 400,
+    alignItems: 'center',
   },
   modalTitle: {
     fontSize: 20,
@@ -102,62 +101,74 @@ export default StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
-  timeContainer: {
+  timePickersContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
+    width: '100%',
   },
-  timeInputContainer: {
+  wheelPickerWrapper: {
     alignItems: 'center',
+    marginHorizontal: 5,
   },
-  timeInput: {
+  pickerLabel: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 5,
+  },
+  pickerContainer: {
+    height: 120, // Reduced from 150
+    width: 80,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 8,
+    overflow: 'hidden',
     borderWidth: 1,
     borderColor: '#CDDDE2',
-    borderRadius: 8,
-    padding: 8,
-    width: 60,
-    textAlign: 'center',
-    marginHorizontal: 5,
+  },
+  scrollPicker: {
+    backgroundColor: '#ffffff',
   },
   timeSeparator: {
     fontSize: 24,
     marginHorizontal: 5,
-    marginVertical: 15,
+    marginTop: 30, // Reduced from 40 to match new height
   },
-  ampmButton: {
-    backgroundColor: '#2196F3',
-    padding: 8,
-    borderRadius: 8,
-    marginLeft: 10,
-    width: 60,
-  },
-  ampmButtonText: {
-    color: 'white',
-    textAlign: 'center',
-    fontWeight: '600',
-  },
-  inputContainer: {
-    marginBottom: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  temperaturePickerContainer: {
     alignItems: 'center',
+    marginBottom: 20,
+    width: '100%',
   },
-  inputLabel: {
+  temperatureLabel: {
     fontSize: 16,
-    flex: 1,
+    color: '#666',
+    marginBottom: 10,
   },
-  input: {
+  temperaturePickerWrapper: {
+    height: 120, // Reduced from 150
+    width: 100,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 8,
+    overflow: 'hidden',
     borderWidth: 1,
     borderColor: '#CDDDE2',
-    borderRadius: 8,
-    padding: 8,
-    width: 100,
-    textAlign: 'center',
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingHorizontal: 20,
+    marginBottom: 20,
+  },
+  switchLabel: {
+    fontSize: 16,
+    color: '#666',
   },
   modalButtons: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '100%',
     marginTop: 20,
   },
   modalButton: {
@@ -165,21 +176,17 @@ export default StyleSheet.create({
     padding: 15,
     borderRadius: 8,
     marginHorizontal: 5,
+    alignItems: 'center',
   },
   cancelButton: {
-    backgroundColor: '#ff4444',
+    backgroundColor: '#cc3300',
   },
   submitButton: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#23C4FF',
   },
-  modalButtonText: {
+  buttonText: {
     color: 'white',
-    textAlign: 'center',
+    fontSize: 16,
     fontWeight: '600',
-  },
-  warningText: {
-    color: '#ff4444',
-    fontSize: 14,
-    lineHeight: 20,
   },
 });

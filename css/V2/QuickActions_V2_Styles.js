@@ -43,7 +43,7 @@ export default StyleSheet.create({
     fontWeight: 'bold',
   },
   skipButton: {
-    backgroundColor: '#CD853F', // Orange-brown color from screenshot
+    backgroundColor: '#CD853F',
     paddingVertical: 25,
     justifyContent: 'space-between',
   },
@@ -59,7 +59,7 @@ export default StyleSheet.create({
     textAlign: 'center',
   },
   presetButton: {
-    backgroundColor: '#3498db', // Light blue for presets
+    backgroundColor: '#3498db',
     paddingVertical: 25,
     paddingHorizontal: 10,
     justifyContent: 'space-between',

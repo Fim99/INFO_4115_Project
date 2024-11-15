@@ -1,28 +1,43 @@
 import React, { useState } from "react";
-import { Text, View, TouchableOpacity, FlatList } from "react-native";
+import { Text, View, TouchableOpacity, FlatList, TextInput, Modal, Button } from "react-native";
 import styles from "../../css/V2/Scheduling_V2_Styles";
-import RefreshButton from '../Refresh_Button';
+import RefreshButton from "../Refresh_Button";
 
-// Main component for scheduling events in the Smart AC app
-const SmartACScheduling = () => {
-  // State to manage the list of scheduled events, initializing with some sample events
-  const [scheduledEvents, setScheduledEvents] = useState([
-    { time: getRandomHourDateTime(), repeated: Math.random() > 0.5, temperature: getRandomTemperature() },
-    { time: getRandomHourDateTime(), repeated: Math.random() > 0.5, temperature: getRandomTemperature() },
-    { time: getRandomHourDateTime(), repeated: Math.random() > 0.5, temperature: getRandomTemperature() },
-    { time: getRandomHourDateTime(), repeated: Math.random() > 0.5, temperature: getRandomTemperature() },
-    { time: getRandomHourDateTime(), repeated: Math.random() > 0.5, temperature: getRandomTemperature() },
-  ]);
+const SmartACSchedulingV2 = () => {
+  const [scheduledEvents, setScheduledEvents] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [newEvent, setNewEvent] = useState({
+    date: "2024-11-15", // Default date
+    time: "12:00", // Default time
+    temperature: "22", // Default temperature
+    amPm: "AM",
+    repeated: false,
+  });
 
-  // Function to add a new scheduled event to the list
   const handleAddScheduledEvent = () => {
-    setScheduledEvents([
-      ...scheduledEvents,
-      { time: getRandomHourDateTime(), repeated: Math.random() > 0.5, temperature: getRandomTemperature() },
-    ]);
+    // Validation before adding the event
+    if (
+      /^\d{4}-\d{2}-\d{2}$/.test(newEvent.date) && // Check date format
+      /^\d{1,2}:\d{2}$/.test(newEvent.time) && // Check time format
+      newEvent.time.split(":")[0] >= 1 && newEvent.time.split(":")[0] <= 12 && // Validate time range (1-12)
+      !isNaN(newEvent.temperature) && // Check temperature is a number
+      newEvent.temperature >= 16 &&
+      newEvent.temperature <= 30 // Validate temperature range
+    ) {
+      setScheduledEvents([...scheduledEvents, { ...newEvent }]);
+      setIsModalVisible(false);
+      setNewEvent({
+        date: "2024-11-15",
+        time: "12:00",
+        temperature: "22",
+        amPm: "AM",
+        repeated: false,
+      });
+    } else {
+      alert("Please provide valid inputs.");
+    }
   };
 
-  // Function to delete a scheduled event by index
   const handleDeleteEvent = (index) => {
     const updatedEvents = [...scheduledEvents];
     updatedEvents.splice(index, 1);
@@ -31,64 +46,90 @@ const SmartACScheduling = () => {
 
   return (
     <View style={styles.container}>
-      {/* Refresh Button */}
       <RefreshButton onPress={RefreshButton.handleRefresh} />
-      <View>
-        {/* Conditionally render the next scheduled event if events are present */}
-        {scheduledEvents.length > 0 && (
-          <Text style={styles.nextScheduleText}>
-            Next Scheduled At:{'\n'}{scheduledEvents[0].time}
-          </Text>
-        )}
-      </View>
+      {scheduledEvents.length > 0 && (
+        <Text style={styles.nextScheduleText}>
+          Next Scheduled At:
+          {"\n"}
+          {scheduledEvents[0].date} {scheduledEvents[0].time} {scheduledEvents[0].amPm}
+        </Text>
+      )}
       <View style={styles.topBar}>
-        {/* Button to add a new scheduled event */}
-        <TouchableOpacity onPress={handleAddScheduledEvent} style={styles.addButton}>
+        <TouchableOpacity onPress={() => setIsModalVisible(true)} style={styles.addButton}>
           <Text style={styles.addButtonText}>+</Text>
         </TouchableOpacity>
       </View>
-      {/* Display list of all scheduled events */}
       <FlatList
         data={scheduledEvents}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
-          <TouchableOpacity>
           <View style={styles.eventBox}>
-            <Text style={styles.eventTime}>{item.time}</Text>
-            <Text style={styles.eventTemperature}>
-              {item.temperature}°C
-            </Text>
-            <Text style={styles.eventDetail}>
-              {item.repeated ? "Repeated" : "Once"}
-            </Text>
-            {/* Button to delete an event from the list */}
+            <Text style={styles.eventTime}>{item.date} {item.time} {item.amPm}</Text>
+            <Text style={styles.eventTemperature}>{item.temperature}°C</Text>
+            <Text style={styles.eventDetail}>{item.repeated ? "Repeated" : "Once"}</Text>
             <TouchableOpacity onPress={() => handleDeleteEvent(index)} style={styles.deleteButton}>
               <Text style={styles.deleteButtonText}>X</Text>
             </TouchableOpacity>
           </View>
-          </TouchableOpacity>
         )}
         contentContainerStyle={styles.eventList}
       />
+      <Modal visible={isModalVisible} transparent={true} animationType="slide">
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>Add New Event</Text>
+            <TextInput
+              style={styles.input}
+              value={newEvent.date}
+              onChangeText={(text) => setNewEvent({ ...newEvent, date: text })}
+              placeholder="YYYY-MM-DD"
+              keyboardType="default"
+            />
+            <View style={styles.inputContainer}>
+              <Text>Time:</Text>
+              <TextInput
+                style={styles.input}
+                value={newEvent.time}
+                onChangeText={(text) => setNewEvent({ ...newEvent, time: text })}
+                placeholder="HH:MM"
+                keyboardType="numeric"
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Text>Temperature (16-30°C):</Text>
+              <TextInput
+                style={styles.input}
+                value={newEvent.temperature}
+                onChangeText={(text) => setNewEvent({ ...newEvent, temperature: text })}
+                placeholder="Temperature"
+                keyboardType="numeric"
+              />
+            </View>
+            <View style={styles.toggleContainer}>
+              <Text>AM/PM:</Text>
+              <Button
+                title={newEvent.amPm}
+                onPress={() =>
+                  setNewEvent({ ...newEvent, amPm: newEvent.amPm === "AM" ? "PM" : "AM" })
+                }
+              />
+            </View>
+            <View style={styles.toggleContainer}>
+              <Text>Repeat:</Text>
+              <Button
+                title={newEvent.repeated ? "Repeated" : "Once"}
+                onPress={() =>
+                  setNewEvent({ ...newEvent, repeated: !newEvent.repeated })
+                }
+              />
+            </View>
+            <Button title="Add Event" onPress={handleAddScheduledEvent} />
+            <Button title="Cancel" color="red" onPress={() => setIsModalVisible(false)} />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
 
-// Helper function to generate a random date and time string
-const getRandomHourDateTime = () => {
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  const randomDay = days[Math.floor(Math.random() * days.length)];
-  const randomMonth = months[Math.floor(Math.random() * months.length)];
-  const randomDate = Math.floor(Math.random() * 28) + 1;
-  const randomHour = Math.floor(Math.random() * 12) + 1;
-  const randomAMPM = Math.floor(Math.random() * 2) === 0 ? "AM" : "PM";
-  return `${randomDay}, ${randomMonth} ${randomDate}, ${randomHour}:00 ${randomAMPM}`;
-};
-
-// Helper function to generate a random temperature between 16°C and 30°C
-const getRandomTemperature = () => {
-  return Math.floor(Math.random() * (30 - 16 + 1)) + 16;
-};
-
-export default SmartACScheduling;
+export default SmartACSchedulingV2;
