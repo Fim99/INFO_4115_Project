@@ -12,19 +12,19 @@ const EnergyIcon = require('../../images/Energy.png');
 const MoreControlsScreen = ({ navigation }) => {
   const controls = [
     {
-      backgroundColor: '#B8C7E5',  // Light blue color
+      backgroundColor: '#79a2f3',  // Light blue color
       icon: fanIcon,
       description: 'Allows you to control your temperature, fan speed and operation mode',
       onPress: () => navigation.navigate('TempFan_V2'),
     },
     {
-      backgroundColor: '#D9D9D9',  // Light gray color
+      backgroundColor: '#acafac',  // Light gray color
       icon: ScheduleIcon,
       description: 'Schedule a date, time and temperature where you want your AC to turn on',
       onPress: () => navigation.navigate('Scheduling_V2'),
     },
     {
-      backgroundColor: '#B5E5C3',  // Light green color
+      backgroundColor: '#A5FFAC',  // Light green color
       icon: EnergyIcon,
       description: 'View your energy usage and cost throughout the day, and even historical data',
       onPress: () => navigation.navigate('Energy_V2'),

@@ -42,9 +42,9 @@ const QuickActions = () => {
 
   return (
     <View style={styles.container}>
+      <RefreshButton onPress={RefreshButton.handleRefresh} />
       <View style={styles.header}>
         <Text style={styles.title}>Quick Actions</Text>
-        <RefreshButton onPress={RefreshButton.handleRefresh} />
       </View>
 
       <View style={styles.gridContainer}>

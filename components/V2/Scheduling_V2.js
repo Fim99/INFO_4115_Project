@@ -1,34 +1,105 @@
-import React, { useState } from "react";
-import { Text, View, TouchableOpacity, FlatList, TextInput, Modal, Button } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, TouchableOpacity, FlatList, TextInput, Modal } from "react-native";
 import styles from "../../css/V2/Scheduling_V2_Styles";
 import RefreshButton from "../Refresh_Button";
 
 const SmartACSchedulingV2 = () => {
-  const [scheduledEvents, setScheduledEvents] = useState([]);
+  const formatDate = (date) => {
+    const d = new Date(date);
+    return d.toISOString().split('T')[0];
+  };
+
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const [scheduledEvents, setScheduledEvents] = useState([
+    {
+      id: Date.now(), // Add unique ID
+      date: formatDate(tomorrow),
+      time: "08:30",
+      temperature: "23",
+      amPm: "AM",
+      repeated: true,
+    }
+  ]);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [newEvent, setNewEvent] = useState({
-    date: "2024-11-15", // Default date
-    time: "12:00", // Default time
-    temperature: "22", // Default temperature
+    date: formatDate(today),
+    time: "12",
+    minutes: "00",
+    temperature: "22",
     amPm: "AM",
     repeated: false,
   });
 
+  useEffect(() => {
+    if (isModalVisible) {
+      setNewEvent(prev => ({
+        ...prev,
+        date: formatDate(today)
+      }));
+    }
+  }, [isModalVisible]);
+
+  const getTimeValue = (time, amPm) => {
+    const [hours, minutes] = time.split(':').map(Number);
+    let hour24 = hours;
+    
+    if (amPm === "PM" && hours !== 12) {
+      hour24 += 12;
+    } else if (amPm === "AM" && hours === 12) {
+      hour24 = 0;
+    }
+    
+    return hour24 * 60 + minutes;
+  };
+
+  const getSortedEvents = (events) => {
+    return [...events].sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      
+      if (dateA.getTime() !== dateB.getTime()) {
+        return dateA - dateB;
+      }
+      
+      return getTimeValue(a.time, a.amPm) - getTimeValue(b.time, b.amPm);
+    });
+  };
+
+  const getNextScheduledEvent = () => {
+    if (scheduledEvents.length === 0) return null;
+    const sortedEvents = getSortedEvents(scheduledEvents);
+    return sortedEvents[0];
+  };
+
   const handleAddScheduledEvent = () => {
-    // Validation before adding the event
     if (
-      /^\d{4}-\d{2}-\d{2}$/.test(newEvent.date) && // Check date format
-      /^\d{1,2}:\d{2}$/.test(newEvent.time) && // Check time format
-      newEvent.time.split(":")[0] >= 1 && newEvent.time.split(":")[0] <= 12 && // Validate time range (1-12)
-      !isNaN(newEvent.temperature) && // Check temperature is a number
+      /^\d{4}-\d{2}-\d{2}$/.test(newEvent.date) &&
+      /^\d{1,2}$/.test(newEvent.time) &&
+      /^\d{2}$/.test(newEvent.minutes) &&
+      parseInt(newEvent.time) >= 1 &&
+      parseInt(newEvent.time) <= 12 &&
+      parseInt(newEvent.minutes) >= 0 &&
+      parseInt(newEvent.minutes) <= 59 &&
+      !isNaN(newEvent.temperature) &&
       newEvent.temperature >= 16 &&
-      newEvent.temperature <= 30 // Validate temperature range
+      newEvent.temperature <= 30
     ) {
-      setScheduledEvents([...scheduledEvents, { ...newEvent }]);
+      const eventWithId = {
+        ...newEvent,
+        id: Date.now(), // Add unique ID to new events
+        time: `${newEvent.time}:${newEvent.minutes}`,
+      };
+      
+      setScheduledEvents([...scheduledEvents, eventWithId]);
       setIsModalVisible(false);
       setNewEvent({
-        date: "2024-11-15",
-        time: "12:00",
+        date: formatDate(today),
+        time: "12",
+        minutes: "00",
         temperature: "22",
         amPm: "AM",
         repeated: false,
@@ -38,37 +109,39 @@ const SmartACSchedulingV2 = () => {
     }
   };
 
-  const handleDeleteEvent = (index) => {
-    const updatedEvents = [...scheduledEvents];
-    updatedEvents.splice(index, 1);
-    setScheduledEvents(updatedEvents);
+  const handleDeleteEvent = (eventId) => {
+    setScheduledEvents(currentEvents => 
+      currentEvents.filter(event => event.id !== eventId)
+    );
   };
+
+  const nextEvent = getNextScheduledEvent();
+  const sortedEvents = getSortedEvents(scheduledEvents);
 
   return (
     <View style={styles.container}>
       <RefreshButton onPress={RefreshButton.handleRefresh} />
-      {scheduledEvents.length > 0 && (
-        <Text style={styles.nextScheduleText}>
-          Next Scheduled At:
-          {"\n"}
-          {scheduledEvents[0].date} {scheduledEvents[0].time} {scheduledEvents[0].amPm}
-        </Text>
-      )}
+      <Text style={styles.nextScheduleText}>
+        Next Scheduled At:{"\n"}
+        {nextEvent
+          ? `${nextEvent.date} ${nextEvent.time} ${nextEvent.amPm}`
+          : "None"}
+      </Text>
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => setIsModalVisible(true)} style={styles.addButton}>
           <Text style={styles.addButtonText}>+</Text>
         </TouchableOpacity>
       </View>
       <FlatList
-        data={scheduledEvents}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item, index }) => (
+        data={sortedEvents}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
           <View style={styles.eventBox}>
-            <Text style={styles.eventTime}>{item.date} {item.time} {item.amPm}</Text>
+            <Text style={styles.eventTime}>{item.date} {"\n"} {item.time} {item.amPm}</Text>
             <Text style={styles.eventTemperature}>{item.temperature}°C</Text>
             <Text style={styles.eventDetail}>{item.repeated ? "Repeated" : "Once"}</Text>
-            <TouchableOpacity onPress={() => handleDeleteEvent(index)} style={styles.deleteButton}>
-              <Text style={styles.deleteButtonText}>X</Text>
+            <TouchableOpacity onPress={() => handleDeleteEvent(item.id)} style={styles.deleteButton}>
+              <Text style={styles.deleteButtonText}>×</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -78,25 +151,58 @@ const SmartACSchedulingV2 = () => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Add New Event</Text>
-            <TextInput
-              style={styles.input}
-              value={newEvent.date}
-              onChangeText={(text) => setNewEvent({ ...newEvent, date: text })}
-              placeholder="YYYY-MM-DD"
-              keyboardType="default"
-            />
+            
             <View style={styles.inputContainer}>
-              <Text>Time:</Text>
+              <Text style={styles.inputLabel}>Date</Text>
               <TextInput
                 style={styles.input}
-                value={newEvent.time}
-                onChangeText={(text) => setNewEvent({ ...newEvent, time: text })}
-                placeholder="HH:MM"
-                keyboardType="numeric"
+                value={newEvent.date}
+                onChangeText={(text) => setNewEvent({ ...newEvent, date: text })}
+                placeholder="YYYY-MM-DD"
+                keyboardType="default"
               />
             </View>
+
+            <View style={styles.timeContainer}>
+              <View style={[styles.inputContainer, styles.timeInput]}>
+                <Text style={styles.inputLabel}>Hour</Text>
+                <TextInput
+                  style={styles.input}
+                  value={newEvent.time}
+                  onChangeText={(text) => setNewEvent({ ...newEvent, time: text })}
+                  placeholder="HH"
+                  keyboardType="numeric"
+                  maxLength={2}
+                />
+              </View>
+              
+              <View style={[styles.inputContainer, styles.timeInput]}>
+                <Text style={styles.inputLabel}>Minutes</Text>
+                <TextInput
+                  style={styles.input}
+                  value={newEvent.minutes}
+                  onChangeText={(text) => setNewEvent({ ...newEvent, minutes: text })}
+                  placeholder="MM"
+                  keyboardType="numeric"
+                  maxLength={2}
+                />
+              </View>
+
+              <View style={[styles.inputContainer, styles.timeInput]}>
+                <Text style={styles.inputLabel}>AM/PM</Text>
+                <TouchableOpacity
+                  style={styles.amPmButton}
+                  onPress={() =>
+                    setNewEvent({ ...newEvent, amPm: newEvent.amPm === "AM" ? "PM" : "AM" })
+                  }
+                >
+                  <Text style={styles.amPmButtonText}>{newEvent.amPm}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
             <View style={styles.inputContainer}>
-              <Text>Temperature (16-30°C):</Text>
+              <Text style={styles.inputLabel}>Temperature (16-30°C)</Text>
               <TextInput
                 style={styles.input}
                 value={newEvent.temperature}
@@ -105,26 +211,29 @@ const SmartACSchedulingV2 = () => {
                 keyboardType="numeric"
               />
             </View>
+
             <View style={styles.toggleContainer}>
-              <Text>AM/PM:</Text>
-              <Button
-                title={newEvent.amPm}
-                onPress={() =>
-                  setNewEvent({ ...newEvent, amPm: newEvent.amPm === "AM" ? "PM" : "AM" })
-                }
-              />
+              <Text style={styles.toggleLabel}>Repeat Event</Text>
+              <TouchableOpacity
+                style={styles.amPmButton}
+                onPress={() => setNewEvent({ ...newEvent, repeated: !newEvent.repeated })}
+              >
+                <Text style={styles.amPmButtonText}>
+                  {newEvent.repeated ? "Repeated" : "Once"}
+                </Text>
+              </TouchableOpacity>
             </View>
-            <View style={styles.toggleContainer}>
-              <Text>Repeat:</Text>
-              <Button
-                title={newEvent.repeated ? "Repeated" : "Once"}
-                onPress={() =>
-                  setNewEvent({ ...newEvent, repeated: !newEvent.repeated })
-                }
-              />
-            </View>
-            <Button title="Add Event" onPress={handleAddScheduledEvent} />
-            <Button title="Cancel" color="red" onPress={() => setIsModalVisible(false)} />
+
+            <TouchableOpacity style={styles.actionButton} onPress={handleAddScheduledEvent}>
+              <Text style={styles.actionButtonText}>Add Event</Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={() => setIsModalVisible(false)}
+            >
+              <Text style={styles.cancelButtonText}>Cancel</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>

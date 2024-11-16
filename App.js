@@ -15,6 +15,7 @@ import QuickActions_V2 from './components/V2/QuickActions_V2';
 import MoreControls_V2 from './components/V2/MoreControls_V2';
 import TempFan_V2 from './components/V2/TempFan_V2';
 import Scheduling_V2 from './components/V2/Scheduling_V2';
+import Energy_V2 from './components/V2/Energy_V2';
 
 
 const Stack = createStackNavigator();
@@ -26,17 +27,18 @@ export default function App() {
         <Stack.Screen name="Main" component={Main} />
         {/* Version 1 */}
         <Stack.Screen name="Home_V1" component={Home_V1} />
+        <Stack.Screen name="QuickActions_V1" component={QuickActions_V1} />
+        <Stack.Screen name="MoreControls_V1" component={MoreControls_V1} />
         <Stack.Screen name="TempFan_V1" component={TempFan_V1 }/>
         <Stack.Screen name="Scheduling_V1" component={Scheduling_V1} />
         <Stack.Screen name="Energy_V1" component={Energy_V1} />
-        <Stack.Screen name="QuickActions_V1" component={QuickActions_V1} />
-        <Stack.Screen name="MoreControls_V1" component={MoreControls_V1} />
         {/* Version 2 */}
         <Stack.Screen name="Home_V2" component={Home_V2} />
         <Stack.Screen name="QuickActions_V2" component={QuickActions_V2} />
         <Stack.Screen name="MoreControls_V2" component={MoreControls_V2} />
         <Stack.Screen name="TempFan_V2" component={TempFan_V2 }/>
         <Stack.Screen name="Scheduling_V2" component={Scheduling_V2} />
+        <Stack.Screen name="Energy_V2" component={Energy_V2} />
       </Stack.Navigator>
     </NavigationContainer>
   );

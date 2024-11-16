@@ -75,7 +75,7 @@ const HomeScreen = () => {
       <View style={styles.infoContainer}>
         <View style={[
           styles.statusBox,
-          { backgroundColor: isOn ? '#4CAF50' : '#FF4444' }
+          { backgroundColor: isOn ? '#4CAF50' : '#cc3300' }
         ]}>
           <Text style={styles.statusText}>Currently: {isOn ? 'ON' : 'OFF'}</Text>
         </View>
