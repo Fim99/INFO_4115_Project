@@ -1,8 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Text, View, TouchableOpacity, ScrollView, Modal, Switch } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import ScrollPicker from 'react-native-wheel-scrollview-picker';
 import RefreshButton from '../Refresh_Button';
+import GridBackground from '../GridBackground';
 import styles from '../../css/V1/Scheduling_V1_Styles';
 
 const formatDate = (date) => {
@@ -15,10 +16,9 @@ const tomorrow = new Date(today);
 tomorrow.setDate(tomorrow.getDate() + 1);
 
 const SmartACSchedulingV1 = () => {
-  // Modified state to include unique IDs for each event
   const [scheduledEvents, setScheduledEvents] = useState([
     { 
-      id: '1', // Added unique ID
+      id: '1',
       date: formatDate(tomorrow),
       time: '08:30 AM',
       temperature: 22,
@@ -34,7 +34,6 @@ const SmartACSchedulingV1 = () => {
   const [temperatureIndex, setTemperatureIndex] = useState(6);
   const [repeated, setRepeated] = useState(false);
 
-  // Data for pickers
   const hours = Array.from({ length: 12 }, (_, i) => (i + 1).toString().padStart(2, '0'));
   const minutes = Array.from({ length: 60 }, (_, i) => i.toString().padStart(2, '0'));
   const ampmOptions = ['AM', 'PM'];
@@ -58,7 +57,13 @@ const SmartACSchedulingV1 = () => {
     })[0];
   }, [scheduledEvents]);
 
-  // Memoized marked dates for calendar
+  // Set selectedDate to nextEvent.date on component mount
+  useEffect(() => {
+    if (nextEvent && !selectedDate) {
+      setSelectedDate(nextEvent.date);
+    }
+  }, [nextEvent, selectedDate]);
+
   const markedDates = useMemo(() => {
     const marked = {};
     scheduledEvents.forEach(event => {
@@ -89,7 +94,7 @@ const SmartACSchedulingV1 = () => {
     setScheduledEvents(prev => [
       ...prev,
       {
-        id: Date.now().toString(), // Generate unique ID using timestamp
+        id: Date.now().toString(),
         date: selectedDate,
         time: formattedTime,
         temperature,
@@ -105,7 +110,6 @@ const SmartACSchedulingV1 = () => {
     setModalVisible(false);
   };
 
-  // Updated delete handler to use event ID instead of index
   const handleDeleteSchedule = (eventId) => {
     setScheduledEvents(prev => prev.filter(event => event.id !== eventId));
   };
@@ -132,6 +136,7 @@ const SmartACSchedulingV1 = () => {
 
   return (
     <View style={styles.container}>
+      <GridBackground/>
       <RefreshButton onPress={RefreshButton.handleRefresh} />
 
       {nextEvent && (
@@ -148,8 +153,8 @@ const SmartACSchedulingV1 = () => {
         markedDates={markedDates}
         onDayPress={day => setSelectedDate(day.dateString)}
         theme={{
-          todayTextColor: '#2196F3',
-          selectedDayBackgroundColor: '#2196F3',
+          todayTextColor: '#589cfb',
+          selectedDayBackgroundColor: '#589cfb',
           arrowColor: '#2196F3',
         }}
       />
@@ -203,7 +208,7 @@ const SmartACSchedulingV1 = () => {
                 value={repeated}
                 onValueChange={setRepeated}
                 trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={repeated ? "#2196F3" : "#f4f3f4"}
+                thumbColor={repeated ? "#589cfb" : "#f4f3f4"}
               />
             </View>
 

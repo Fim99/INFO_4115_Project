@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Animated, StyleSheet,} from 'react-native';
 import styles from "../../css/V1/QuickActions_V1_Styles";
+import GridBackground from '../GridBackground';
 import RefreshButton from '../Refresh_Button';
 
 const QuickActions = () => {
@@ -41,6 +42,7 @@ const QuickActions = () => {
 
   return (
     <View style={styles.container}>
+      <GridBackground/>
       <Text style={styles.title}>Quick Actions</Text>
         {/* Refresh Button */}
         <RefreshButton onPress={RefreshButton.handleRefresh} />

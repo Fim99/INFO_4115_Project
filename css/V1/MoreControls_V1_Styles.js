@@ -9,9 +9,14 @@ const styles = StyleSheet.create({
       padding: 20,
     },
     headerText: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: 'bold',
     textAlign: 'center',
+    marginHorizontal: 30,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "#b1d8fb",
+    backgroundColor: '#fff',
     },
     content: {
       padding: 16,
@@ -42,7 +47,7 @@ const styles = StyleSheet.create({
       fontWeight: '600',
     },
     descriptionText: {
-      color: '#666666',
+      color: '#444444',
       fontSize: 14,
       paddingHorizontal: 4,
     },

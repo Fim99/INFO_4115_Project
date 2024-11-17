@@ -28,7 +28,7 @@ export default StyleSheet.create({
     borderColor: '#CDDDE2',
   },
   addBar: {
-    backgroundColor: '#23C4FF',
+    backgroundColor: '#589cfb',
     padding: 15,
     borderRadius: 8,
     alignItems: 'center',
@@ -182,7 +182,7 @@ export default StyleSheet.create({
     backgroundColor: '#cc3300',
   },
   submitButton: {
-    backgroundColor: '#23C4FF',
+    backgroundColor: '#589cfb',
   },
   buttonText: {
     color: 'white',

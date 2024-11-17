@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    paddingTop: StatusBar.currentHeight || 16,
   },
   headerText: {
     fontSize: 24,

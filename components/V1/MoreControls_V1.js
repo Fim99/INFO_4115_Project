@@ -1,8 +1,9 @@
 // MoreControlsScreen.js
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, SafeAreaView, StatusBar } from 'react-native';
-import styles from '../../css/V1/MoreActions_V1_Styles';
+import styles from '../../css/V1/MoreControls_V1_Styles';
 import RefreshButton from '../Refresh_Button';
+import GridBackground from '../GridBackground';
 
 // Import the images
 const fanIcon = require('../../images/Fan.png');
@@ -13,7 +14,7 @@ const MoreControlsScreen = ({ navigation }) => {
   const controls = [
     {
       title: 'Temperature & Fans',
-      backgroundColor: '#23C4FF',
+      backgroundColor: '#589cfb',
       description: 'Allows you to control your temperature, fan speed and operation mode',
       icon: fanIcon,
       onPress: () => navigation.navigate('TempFan_V1'),
@@ -36,7 +37,7 @@ const MoreControlsScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="default" />
+      <GridBackground/>
       <View style={styles.header}>
         {/* Refresh Button */}
         <RefreshButton onPress={RefreshButton.handleRefresh} />

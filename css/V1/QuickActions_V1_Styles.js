@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 20,
         textAlign: 'center',
+        marginHorizontal: 30,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: "#b1d8fb",
+        backgroundColor: '#fff',
       },
       toggleContainer: {
         marginBottom: 20,

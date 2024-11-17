@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, Dimensions} from "react-native";
 import { LineChart } from "react-native-chart-kit";
 import styles from "../../css/V1/Energy_V1_Styles";
+import GridBackground from '../GridBackground';
 import RefreshButton from '../Refresh_Button';
 
 const SmartACScheduling = () => {
@@ -47,6 +48,7 @@ const SmartACScheduling = () => {
 
   return (
     <View style={styles.container}>
+      <GridBackground/>
       <View style={styles.topBar}></View>
       <RefreshButton onPress={RefreshButton.handleRefresh} />
       <View>
@@ -108,6 +110,8 @@ const SmartACScheduling = () => {
             style={{
               marginVertical: 8,
               borderRadius: 16,
+              borderWidth: 1,
+              borderColor: "#b1d8fb",
             }}
             withInnerLines={true}
             withOuterLines={false}

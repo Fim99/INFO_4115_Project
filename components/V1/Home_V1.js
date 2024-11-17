@@ -1,8 +1,10 @@
+// screens/HomeScreen.js
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../../css/V1/Home_V1_Styles';
 import RefreshButton from '../Refresh_Button';
+import GridBackground from '../GridBackground';
 
 // Helper functions
 const getRandomTemperature = () => {
@@ -21,7 +23,7 @@ const getRandomHourDateTime = () => {
 };
 
 const HomeScreen = () => {
-  const navigation = useNavigation(); // Initialize navigation
+  const navigation = useNavigation();
 
   const [isOn, setIsOn] = useState(Math.random() < 0.5);
   const [temperature, setTemperature] = useState(getRandomTemperature());
@@ -29,6 +31,7 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <GridBackground/>    
       {/* Refresh Button */}
       <RefreshButton onPress={RefreshButton.handleRefresh} />
       

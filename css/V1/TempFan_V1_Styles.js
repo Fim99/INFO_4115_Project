@@ -13,18 +13,24 @@ export default StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 18,
+    textAlign: "center",
     fontWeight: "bold",
     marginBottom: 10,
+    borderRadius:20, 
+    borderWidth: 1,
+    borderColor: "#b1d8fb",
+    backgroundColor: '#fff',
   },
   labelContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    marginHorizontal: 5,
     marginTop: 5,
   },
   label: {
     fontSize: 14,
     fontWeight: "bold",
-    color: "#333",
+    color: "#000",
   },
   modeIcon: {
     width: 30,
@@ -32,8 +38,8 @@ export default StyleSheet.create({
   },
   slider: {
     width: 300,
-    activeColor: "#23C4FF",
-    inactiveColor: "#CDDDE2",
-    thumbColor: "#23C4FF",
+    activeColor: "#589cfb",
+    inactiveColor: "#fff",
+    thumbColor: "#589cfb",
   },
 });

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Text, View, Image } from "react-native";
 import { RadialSlider } from "react-native-radial-slider";
 import { Slider } from "@rneui/themed";
-import { StatusBar } from "expo-status-bar";
 import styles from "../../css/V1/TempFan_V1_Styles";
+import GridBackground from '../GridBackground';
 import RefreshButton from '../../components/Refresh_Button';
 
 const TempFan = () => {
@@ -27,6 +27,7 @@ const TempFan = () => {
 
   return (
     <View style={styles.container}>
+      <GridBackground/>
       {/* Refresh Button */}
       <RefreshButton onPress={RefreshButton.handleRefresh} />
       {/* Temperature Control with Radial Slider */}
@@ -39,10 +40,10 @@ const TempFan = () => {
           onChange={setSpeed}
           valueStyle={{ fontSize: 50 }}
           unit={"℃"}
-          thumbColor={"#23C4FF"}
-          sliderTrackColor={"#CDDDE2"}
+          thumbColor={"#589cfb"}
+          sliderTrackColor={"#fff"}
           lineColor={"#23C4FF"}
-          linearGradient={[ { offset: '0%', color:'#23C4FF' }, { offset: '100%', color: '#fff' }]}
+          linearGradient={[ { offset: '0%', color:'#589cfb' }, { offset: '100%', color: '#fff' }]}
           isHideLines
           isHideButtons
           isHideSubtitle
@@ -94,8 +95,6 @@ const TempFan = () => {
           ))}
         </View>
       </View>
-
-      <StatusBar style="auto" />
     </View>
   );
 };
