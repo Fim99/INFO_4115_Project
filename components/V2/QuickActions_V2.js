@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Animated } from 'react-native';
 import styles from '../../css/V2/QuickActions_V2_Styles';
+import { LinearGradient } from "expo-linear-gradient";
 import RefreshButton from '../Refresh_Button';
 
 const QuickActions = () => {
@@ -42,6 +43,12 @@ const QuickActions = () => {
 
   return (
     <View style={styles.container}>
+      <LinearGradient
+        colors={['#0D1321', '#1D2D44', '#3E5C76']}
+        style={styles.gradientBackground}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      />
       <RefreshButton onPress={RefreshButton.handleRefresh} />
       <View style={styles.header}>
         <Text style={styles.title}>Quick Actions</Text>

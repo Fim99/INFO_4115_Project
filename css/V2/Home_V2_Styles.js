@@ -19,6 +19,11 @@ export const styles = StyleSheet.create({
     color: '#f0ebd8', // Light text color
     fontSize: 36,
     fontWeight: 'bold',
+    borderWidth: 1,
+    borderColor: "#3E5C76",
+    borderRadius: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -43,6 +48,8 @@ export const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     marginVertical: 20,
+    borderWidth: 1,
+    borderColor: "#3E5C76",
   },
   temperatureText: {
     fontSize: 56,
@@ -66,6 +73,8 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 15,
     width: '45%',
+    borderWidth: 1,
+    borderColor: "#3E5C76",
   },
   statusText: {
     fontSize: 14,
@@ -85,7 +94,13 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     textAlign: 'center',
   },
-
+  gradientBackground: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
 });
 
 export default styles;

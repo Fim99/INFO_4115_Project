@@ -2,6 +2,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView, StatusBar, Image } from 'react-native';
 import styles from '../../css/V2/MoreControls_V2_Styles';
+import { LinearGradient } from "expo-linear-gradient";
 import RefreshButton from '../Refresh_Button';
 
 // Import the images
@@ -33,6 +34,12 @@ const MoreControlsScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <LinearGradient
+        colors={['#0D1321', '#1D2D44', '#3E5C76']}
+        style={styles.gradientBackground}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      />
       <StatusBar barStyle="dark-content" />
       
       {/* Header */}

@@ -3,23 +3,24 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0D1321', // Match base theme background color
+    backgroundColor: '#0D1321',
     padding: 20,
   },
   statusText: {
-    color: '#F0EBD8', // Light cream text
+    color: '#F0EBD8',
     fontSize: 14,
   },
   sectionTitle: {
-    color: '#F0EBD8', // Light cream text
-    fontSize: 24,
-    marginTop: 20,
-    marginBottom: 10,
-    textAlign: 'center',
+    fontSize: 20,
     fontWeight: 'bold',
-    textShadowColor: 'rgba(0, 0, 0, 0.5)', // Shadow for better visibility
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 3,
+    color: '#fff',
+    borderWidth: 1,
+    borderColor: "#3E5C76",
+    borderRadius: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    textAlign: 'center',
+    marginVertical: 15, 
   },
   temperatureContainer: {
     width: '100%',
@@ -37,7 +38,7 @@ export default StyleSheet.create({
     height: 20,
     borderRadius: 10,
     width: '100%',
-    backgroundColor: '#3E5C76', // Dark blue
+    backgroundColor: '#3E5C76',
   },
   marker: {
     position: 'absolute',
@@ -55,7 +56,7 @@ export default StyleSheet.create({
     borderTopWidth: 10,
     borderLeftColor: 'transparent',
     borderRightColor: 'transparent',
-    borderTopColor: '#F0EBD8', // Cream
+    borderTopColor: '#F0EBD8', 
   },
   controlRow: {
     flexDirection: 'row',
@@ -67,7 +68,7 @@ export default StyleSheet.create({
   controlButton: {
     width: 60,
     height: 60,
-    backgroundColor: '#3E5C76', // Match base button color
+    backgroundColor: '#3E5C76',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -79,11 +80,11 @@ export default StyleSheet.create({
   },
   buttonText: {
     fontSize: 30,
-    color: '#F0EBD8', // Light cream
+    color: '#F0EBD8',
   },
   valueText: {
     fontSize: 48,
-    color: '#F0EBD8', // Light cream
+    color: '#F0EBD8',
     fontWeight: 'bold',
   },
   modeContainer: {
@@ -94,13 +95,13 @@ export default StyleSheet.create({
   modeButton: {
     width: 100,
     height: 100,
-    backgroundColor: '#3E5C76', // Match base button color
+    backgroundColor: '#1D2D44',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
   },
   selectedMode: {
-    backgroundColor: '#748CAB', // Slightly lighter shade for selected
+    backgroundColor: '#F0EBD8',
   },
   modeIcon: {
     width: 50,
@@ -108,6 +109,13 @@ export default StyleSheet.create({
     resizeMode: 'contain',
   },
   selectedText: {
-    color: '#F0EBD8', // Match base theme text color
+    color: '#000',
+  },
+  gradientBackground: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
 });

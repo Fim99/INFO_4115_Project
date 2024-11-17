@@ -50,7 +50,12 @@ const TempFan = () => {
 
   return (
     <View style={styles.container}>
-
+      <LinearGradient
+          colors={['#0D1321', '#1D2D44', '#3E5C76']}
+          style={styles.gradientBackground}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
+        />
       {/* Refresh Button */}
       <RefreshButton onPress={handleRefresh} />
 
@@ -123,7 +128,7 @@ const TempFan = () => {
               ][mode]}
               style={[
                 styles.modeIcon,
-                { tintColor: selectedMode === mode ? '#fff' : '#000' } // Change color based on selection
+                { tintColor: selectedMode === mode ? '#000' : '#fff' } // Change color based on selection
               ]}
             />
           </TouchableOpacity>

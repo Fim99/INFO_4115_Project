@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, FlatList, TextInput, Modal } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import styles from "../../css/V2/Scheduling_V2_Styles";
 import RefreshButton from "../Refresh_Button";
 
@@ -120,13 +121,21 @@ const SmartACSchedulingV2 = () => {
 
   return (
     <View style={styles.container}>
+     <LinearGradient
+        colors={['#0D1321', '#1D2D44', '#3E5C76']}
+        style={styles.gradientBackground}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      />
       <RefreshButton onPress={RefreshButton.handleRefresh} />
-      <Text style={styles.nextScheduleText}>
-        Next Scheduled At:{"\n"}
-        {nextEvent
-          ? `${nextEvent.date} ${nextEvent.time} ${nextEvent.amPm}`
-          : "None"}
-      </Text>
+      <View style={styles.nextScheduleBox}>
+        <Text style={styles.nextScheduleText}>
+          Next Scheduled At:{"\n"}
+          {nextEvent
+            ? `${nextEvent.date} ${nextEvent.time} ${nextEvent.amPm}`
+            : "None"}
+        </Text>
+      </View>
       <View style={styles.topBar}>
         <TouchableOpacity onPress={() => setIsModalVisible(true)} style={styles.addButton}>
           <Text style={styles.addButtonText}>+</Text>

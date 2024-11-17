@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../../css/V2/Home_V2_Styles';
+import { LinearGradient } from "expo-linear-gradient";
 import RefreshButton from '../Refresh_Button';
 
 // Helper functions
@@ -17,7 +18,7 @@ const getRandomHourDateTime = () => {
   const randomDate = Math.floor(Math.random() * 28) + 1;
   const randomHour = Math.floor(Math.random() * 12) + 1;
   const randomAMPM = Math.floor(Math.random() * 2) === 0 ? "AM" : "PM";
-  return `${randomDay}, ${randomMonth} ${randomDate}, ${randomHour}:00 ${randomAMPM}`;
+  return `${randomDay}, ${randomMonth} ${randomDate} \n ${randomHour}:00 ${randomAMPM}`;
 };
 
 
@@ -27,23 +28,14 @@ const HomeScreen = () => {
   const [temperature, setTemperature] = useState(getRandomTemperature());
   const [nextSchedule, setNextSchedule] = useState(getRandomHourDateTime());
 
-  // Get current date for header
-  const getCurrentDate = () => {
-    const date = new Date();
-    const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thur', 'Fri', 'Sat'];
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    return `${days[date.getDay()]}, ${months[date.getMonth()]} ${date.getDate()}`;
-  };
-
-  // Refresh function
-  const handleRefresh = useCallback(() => {
-    setIsOn(Math.random() < 0.5);
-    setTemperature(getRandomTemperature());
-    setNextSchedule(getRandomHourDateTime());
-  }, []);
-
   return (
     <SafeAreaView style={styles.container}>
+     <LinearGradient
+        colors={['#0D1321', '#1D2D44', '#3E5C76']}
+        style={styles.gradientBackground}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 0, y: 1 }}
+      />
     {/* Refresh Button */}
     <RefreshButton onPress={RefreshButton.handleRefresh} />
       {/* Welcome Text and Refresh Button */}

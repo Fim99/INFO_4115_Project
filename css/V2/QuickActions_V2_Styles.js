@@ -19,6 +19,11 @@ export default StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     color: '#f0ebd8', // Light text color for title
+    borderWidth: 1,
+    borderColor: "#3E5C76",
+    borderRadius: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   gridContainer: {
     flexDirection: 'row',
@@ -76,6 +81,11 @@ export default StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
   },
-
-  
+  gradientBackground: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+  },
 });

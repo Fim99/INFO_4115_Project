@@ -5,13 +5,22 @@ import ScrollPicker from 'react-native-wheel-scrollview-picker';
 import RefreshButton from '../Refresh_Button';
 import styles from '../../css/V1/Scheduling_V1_Styles';
 
+const formatDate = (date) => {
+  const d = new Date(date);
+  return d.toISOString().split('T')[0];
+};
+
+const today = new Date();
+const tomorrow = new Date(today);
+tomorrow.setDate(tomorrow.getDate() + 1);
+
 const SmartACSchedulingV1 = () => {
   // Modified state to include unique IDs for each event
   const [scheduledEvents, setScheduledEvents] = useState([
     { 
       id: '1', // Added unique ID
-      date: '2024-11-14',
-      time: '09:00 AM',
+      date: formatDate(tomorrow),
+      time: '08:30 AM',
       temperature: 22,
       repeated: false
     }

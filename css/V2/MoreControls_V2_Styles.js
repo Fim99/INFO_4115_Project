@@ -19,6 +19,11 @@ const styles = StyleSheet.create({
     textShadowColor: 'rgba(0, 0, 0, 0.5)', // Subtle shadow
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 3,
+    borderWidth: 1,
+    borderColor: "#3E5C76",
+    borderRadius: 15,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
   content: {
     flex: 1,
@@ -70,6 +75,13 @@ const styles = StyleSheet.create({
     lineHeight: 20,
     paddingVertical: 25,
     fontWeight: '500',
+  },
+  gradientBackground: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
 });
 
