@@ -5,6 +5,7 @@ import { Slider } from "@rneui/themed";
 import styles from "../../css/V1/TempFan_V1_Styles";
 import GridBackground from '../GridBackground';
 import RefreshButton from '../../components/Refresh_Button';
+import ScreenWrapper from "../ScreenWrapper";
 
 const TempFan = () => {
   // Generate random initial temperature between 16 and 30
@@ -26,6 +27,7 @@ const TempFan = () => {
   };
 
   return (
+    <ScreenWrapper>
     <View style={styles.container}>
       <GridBackground/>
       {/* Refresh Button */}
@@ -96,6 +98,7 @@ const TempFan = () => {
         </View>
       </View>
     </View>
+    </ScreenWrapper>
   );
 };
 

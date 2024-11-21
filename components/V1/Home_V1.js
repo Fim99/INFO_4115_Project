@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import styles from '../../css/V1/Home_V1_Styles';
 import RefreshButton from '../Refresh_Button';
 import GridBackground from '../GridBackground';
+import ScreenWrapper from '../ScreenWrapper';
 
 // Helper functions
 const getRandomTemperature = () => {
@@ -30,6 +31,7 @@ const HomeScreen = () => {
   const [nextSchedule, setNextSchedule] = useState(getRandomHourDateTime());
 
   return (
+    <ScreenWrapper>
     <SafeAreaView style={styles.container}>
       <GridBackground/>    
       {/* Refresh Button */}
@@ -71,6 +73,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
       </View>
     </SafeAreaView>
+    </ScreenWrapper>
   );
 };
 

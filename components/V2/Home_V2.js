@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import styles from '../../css/V2/Home_V2_Styles';
 import { LinearGradient } from "expo-linear-gradient";
 import RefreshButton from '../Refresh_Button';
+import { ScreenContainer, ScreenContentWrapper } from 'react-native-screens';
+import ScreenWrapper from '../ScreenWrapper';
 
 // Helper functions
 const getRandomTemperature = () => {
@@ -29,6 +31,7 @@ const HomeScreen = () => {
   const [nextSchedule, setNextSchedule] = useState(getRandomHourDateTime());
 
   return (
+    <ScreenWrapper>
     <SafeAreaView style={styles.container}>
      <LinearGradient
         colors={['#0D1321', '#1D2D44', '#3E5C76']}
@@ -77,6 +80,7 @@ const HomeScreen = () => {
         </View>
       </View>
     </SafeAreaView>
+    </ScreenWrapper>
   );
 };
 

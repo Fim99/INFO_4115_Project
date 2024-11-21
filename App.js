@@ -30,7 +30,7 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main">
+        <Stack.Navigator initialRouteName="Energy_V1">
           <Stack.Screen name="Main" component={Main} />
           {/* Version 1 Screens */}
           <Stack.Screen name="Home_V1" component={Home_V1} />

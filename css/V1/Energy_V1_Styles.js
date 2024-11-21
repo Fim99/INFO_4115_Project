@@ -40,12 +40,11 @@ const styles = StyleSheet.create({
   usageButton: {
     position: 'absolute',
     bottom: 20,
-    width: '100%',
+    width: '90%',
     padding: 15,
     backgroundColor: '#589cfb',
     borderRadius: 8,
     alignItems: 'center',
-    justifyContent: 'center',
     alignSelf: 'center',
   },
   usageButtonText: {
