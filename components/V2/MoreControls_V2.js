@@ -50,23 +50,23 @@ const MoreControlsScreen = ({ navigation }) => {
 
       {/* Controls */}
       <View style={styles.content}>
-        {controls.map((control, index) => (
-          <View key={control.title} style={styles.controlRow}>
-            <TouchableOpacity
-              style={[styles.controlButton, { backgroundColor: control.backgroundColor }]}
-              onPress={control.onPress}
-            >
-              <View style={styles.iconContainer}>
-                <Image
-                  source={control.icon}
-                  style={styles.icon}
-                  resizeMode="contain"
-                />
-              </View>
-            </TouchableOpacity>
-            <Text style={styles.descriptionText}>{control.description}</Text>
-          </View>
-        ))}
+      {controls.map((control, index) => (
+        <View key={index} style={styles.controlRow}>
+          <TouchableOpacity
+            style={[styles.controlButton, { backgroundColor: control.backgroundColor }]}
+            onPress={control.onPress}
+          >
+            <View style={styles.iconContainer}>
+              <Image
+                source={control.icon}
+                style={styles.icon}
+                resizeMode="contain"
+              />
+            </View>
+          </TouchableOpacity>
+          <Text style={styles.descriptionText}>{control.description}</Text>
+        </View>
+      ))}
       </View>
     </SafeAreaView>
   );

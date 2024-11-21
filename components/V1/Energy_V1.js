@@ -81,7 +81,7 @@ const SmartACScheduling = () => {
               ],
             }}
             width={Dimensions.get("window").width - 30} // Reduced side padding
-            height={200}
+            height={185}
             yAxisLabel=""
             yAxisSuffix=" kWh"
             yAxisInterval={1}

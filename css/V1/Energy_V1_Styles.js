@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   usageTitle: {
     fontSize: 16,
     fontWeight: "bold",
+    paddingVertical: 5,
     textAlign: "center",
     borderRadius:20, 
     borderWidth: 1,

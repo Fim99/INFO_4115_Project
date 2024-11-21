@@ -114,6 +114,7 @@ const SmartACSchedulingV1 = () => {
     setScheduledEvents(prev => prev.filter(event => event.id !== eventId));
   };
 
+
   const renderScrollPicker = (dataSource, selectedIndex, onValueChange, label) => (
     <View style={styles.wheelPickerWrapper}>
       <Text style={styles.pickerLabel}>{label}</Text>
@@ -124,10 +125,12 @@ const SmartACSchedulingV1 = () => {
           onValueChange={onValueChange}
           wrapperHeight={120}
           wrapperWidth={60}
-          wrapperColor='#FFFFFF'
+          wrapperColor='transparent'
           itemHeight={40}
-          highlightColor='#E8E8E8'
-          highlightBorderWidth={1}
+          highlightColor='#589CFB'
+          highlightBorderWidth={2}
+          activeItemTextColor='#2196F3'
+          itemTextColor='#888'
           style={styles.scrollPicker}
         />
       </View>
@@ -169,66 +172,68 @@ const SmartACSchedulingV1 = () => {
       </TouchableOpacity>
 
       <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Add New Schedule</Text>
-            
-            <View style={styles.timePickersContainer}>
-              {renderScrollPicker(hours, hourIndex, (_, index) => setHourIndex(index), 'Hour')}
-              <Text style={styles.timeSeparator}>:</Text>
-              {renderScrollPicker(minutes, minuteIndex, (_, index) => setMinuteIndex(index), 'Minute')}
-              {renderScrollPicker(ampmOptions, ampmIndex, (_, index) => setAmpmIndex(index), 'AM/PM')}
-            </View>
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => setModalVisible(false)}
+    >
+      <View style={styles.modalContainer}>
+        <View style={styles.modalContent}>
+          <Text style={styles.modalTitle}>Add New Event</Text>
+          
+          <View style={styles.timePickersContainer}>
+            {renderScrollPicker(hours, hourIndex, (_, index) => setHourIndex(index), 'Hour')}
+            <Text style={styles.timeSeparator}>:</Text>
+            {renderScrollPicker(minutes, minuteIndex, (_, index) => setMinuteIndex(index), 'Minute')}
+            {renderScrollPicker(ampmOptions, ampmIndex, (_, index) => setAmpmIndex(index), 'Period')}
+          </View>
 
-            <View style={styles.temperaturePickerContainer}>
-              <Text style={styles.temperatureLabel}>Temperature</Text>
-              <View style={styles.temperaturePickerWrapper}>
-                <ScrollPicker
-                  dataSource={temperatures}
-                  selectedIndex={temperatureIndex}
-                  onValueChange={(_, index) => setTemperatureIndex(index)}
-                  wrapperHeight={120}
-                  wrapperWidth={80}
-                  wrapperColor='#FFFFFF'
-                  itemHeight={40}
-                  highlightColor='#E8E8E8'
-                  highlightBorderWidth={1}
-                />
-              </View>
-            </View>
-
-            <View style={styles.switchContainer}>
-              <Text style={styles.switchLabel}>Repeat Schedule</Text>
-              <Switch
-                value={repeated}
-                onValueChange={setRepeated}
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={repeated ? "#589cfb" : "#f4f3f4"}
+          <View style={styles.temperaturePickerContainer}>
+            <Text style={styles.temperatureLabel}>Set Temperature</Text>
+            <View style={styles.temperaturePickerWrapper}>
+              <ScrollPicker
+                dataSource={temperatures}
+                selectedIndex={temperatureIndex}
+                onValueChange={(_, index) => setTemperatureIndex(index)}
+                wrapperHeight={120}
+                wrapperWidth={80}
+                wrapperColor='transparent'
+                itemHeight={40}
+                highlightColor='#589CFB'
+                highlightBorderWidth={2}
+                activeItemTextColor='#2196F3'
+                itemTextColor='#888'
               />
             </View>
+          </View>
 
-            <View style={styles.modalButtons}>
-              <TouchableOpacity 
-                style={[styles.modalButton, styles.cancelButton]}
-                onPress={() => setModalVisible(false)}
-              >
-                <Text style={styles.buttonText}>Cancel</Text>
-              </TouchableOpacity>
-              <TouchableOpacity 
-                style={[styles.modalButton, styles.submitButton]}
-                onPress={handleSubmit}
-              >
-                <Text style={styles.buttonText}>Add</Text>
-              </TouchableOpacity>
-            </View>
+          <View style={styles.switchContainer}>
+            <Text style={styles.switchLabel}>Repeat Schedule</Text>
+            <Switch
+              value={repeated}
+              onValueChange={setRepeated}
+              trackColor={{ false: "#E0E0E0", true: "#589CFB" }}
+              thumbColor={repeated ? "white" : "#f4f3f4"}
+            />
+          </View>
+
+          <View style={styles.modalButtons}>
+            <TouchableOpacity 
+              style={[styles.modalButton, styles.cancelButton]}
+              onPress={() => setModalVisible(false)}
+            >
+              <Text style={styles.buttonText}>Cancel</Text>
+            </TouchableOpacity>
+            <TouchableOpacity 
+              style={[styles.modalButton, styles.submitButton]}
+              onPress={handleSubmit}
+            >
+              <Text style={styles.buttonText}>Add Schedule</Text>
+            </TouchableOpacity>
           </View>
         </View>
-      </Modal>
+      </View>
+    </Modal>
 
       <ScrollView style={styles.schedulesList}>
         {scheduledEvents

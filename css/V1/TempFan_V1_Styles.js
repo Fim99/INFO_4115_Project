@@ -15,6 +15,7 @@ export default StyleSheet.create({
     fontSize: 18,
     textAlign: "center",
     fontWeight: "bold",
+    paddingVertical: 5,
     marginBottom: 10,
     borderRadius:20, 
     borderWidth: 1,
