@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 1,
     borderColor: "#3E5C76",
-    marginLeft: 'auto',
+    marginLeft: "auto",
   },
   deleteButtonText: {
     color: "#F0EBD8",
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#0D1321",
+    backgroundColor: "rgba(13, 19, 33, 0.75)",
   },
   modalContent: {
     width: "90%",
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     padding: 24,
     borderWidth: 1,
     borderColor: "#748CAB",
+    maxWidth: 400,
   },
   modalTitle: {
     fontSize: 28,

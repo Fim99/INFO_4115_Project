@@ -13,9 +13,10 @@ const ScreenWrapper = ({
         backgroundColor,
         ...Platform.select({
           web: {
-            width: 360,
-            height: 600,
-            maxHeight: 600,
+            width: "100%",
+            height: "100%",
+            maxHeight: 1200,
+            maxWidth: 800,
             alignSelf: 'center',
             overflow: 'hidden',
           },

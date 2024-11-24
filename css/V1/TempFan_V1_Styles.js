@@ -17,10 +17,10 @@ export default StyleSheet.create({
     fontWeight: "bold",
     paddingVertical: 5,
     marginBottom: 10,
-    borderRadius:20, 
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: "#b1d8fb",
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   labelContainer: {
     flexDirection: "row",

@@ -1,24 +1,25 @@
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet, Dimensions } from "react-native";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 const gridItemWidth = (width - 60) / 2;
 
 export default StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0d1321', // Dark background color
+    backgroundColor: "#0d1321",
     padding: 20,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginBottom: 20,
+    paddingTop: 10,
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#f0ebd8', // Light text color for title
+    fontWeight: "bold",
+    color: "#f0ebd8",
     borderWidth: 1,
     borderColor: "#3E5C76",
     borderRadius: 15,
@@ -26,60 +27,59 @@ export default StyleSheet.create({
     paddingVertical: 10,
   },
   gridContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    gap: 10,
   },
   gridItem: {
-    width: gridItemWidth,
-    height: gridItemWidth,
-    marginBottom: 20,
+    width: "48%",
+    aspectRatio: 1,
     borderRadius: 15,
-    overflow: 'hidden',
-    backgroundColor: '#1d2d44', // Dark blue background for grid items
+    overflow: "hidden",
+    backgroundColor: "#1d2d44",
   },
   toggleButton: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   toggleText: {
-    color: '#f0ebd8', // Light text for toggle button
+    color: "#f0ebd8",
     fontSize: 36,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   skipButton: {
-    backgroundColor: '#3e5c76', // Medium blue for the skip button
-    paddingVertical: 25,
-    justifyContent: 'space-between',
+    backgroundColor: "#3e5c76",
+    padding: 15,
+    justifyContent: "space-between",
   },
   skipButtonText: {
-    color: '#f0ebd8', // Light text for button
+    color: "#f0ebd8",
     fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
   },
   scheduledTimeText: {
-    color: '#f0ebd8', // Light text for scheduled time
+    color: "#f0ebd8",
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
   presetButton: {
-    backgroundColor: '#748cab', // Lighter blue for preset button
-    paddingVertical: 25,
-    paddingHorizontal: 10,
-    justifyContent: 'space-between',
+    backgroundColor: "#748cab",
+    padding: 15,
+    justifyContent: "space-between",
   },
   presetButtonText: {
-    color: '#f0ebd8', // Light text for button
+    color: "#f0ebd8",
     fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
   },
   presetDescription: {
-    color: '#f0ebd8', // Light text for description
+    color: "#f0ebd8",
     fontSize: 14,
-    textAlign: 'center',
+    textAlign: "center",
   },
   gradientBackground: {
     position: "absolute",

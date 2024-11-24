@@ -17,10 +17,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingVertical: 5,
     textAlign: "center",
-    borderRadius:20, 
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: "#b1d8fb",
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   energyBox: {
     backgroundColor: "#01a836",
@@ -34,24 +34,24 @@ const styles = StyleSheet.create({
   energyDetail: {
     fontSize: 24,
     color: "#fff",
-    marginRight:14,
-    marginLeft:14,
+    marginRight: 14,
+    marginLeft: 14,
   },
   usageButton: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
-    width: '90%',
+    width: "90%",
     padding: 15,
-    backgroundColor: '#589cfb',
+    backgroundColor: "#589cfb",
     borderRadius: 8,
-    alignItems: 'center',
-    alignSelf: 'center',
+    alignItems: "center",
+    alignSelf: "center",
   },
   usageButtonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 16,
-    fontWeight: 'bold',
-  },  
+    fontWeight: "bold",
+  },
 });
 
 export default styles;

@@ -1,24 +1,24 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0d1321', // Dark background color
+    backgroundColor: "#0d1321", // Dark background color
     padding: 20,
     margin: 0, // Ensure no default margins are applied
   },
 
   headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     marginVertical: 20,
-    position: 'relative',
+    position: "relative",
   },
   welcomeText: {
-    color: '#f0ebd8', // Light text color
+    color: "#f0ebd8", // Light text color
     fontSize: 36,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     borderWidth: 1,
     borderColor: "#3E5C76",
     borderRadius: 15,
@@ -26,73 +26,73 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: '20%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: "20%",
   },
   controlButton: {
-    backgroundColor: '#3e5c76', // Medium blue for buttons
+    backgroundColor: "#3e5c76", // Medium blue for buttons
     padding: 15,
     borderRadius: 10,
-    width: '45%',
-    justifyContent: 'center', 
+    width: "45%",
+    justifyContent: "center",
   },
   buttonText: {
-    color: '#f0ebd8', // Light text for buttons
+    color: "#f0ebd8", // Light text for buttons
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: "center",
   },
   temperatureContainer: {
-    backgroundColor: '#1d2d44', // Dark blue background for the temperature container
+    backgroundColor: "#1d2d44", // Dark blue background for the temperature container
     borderRadius: 10,
     padding: 20,
-    alignItems: 'center',
+    alignItems: "center",
     marginVertical: 20,
     borderWidth: 1,
     borderColor: "#3E5C76",
   },
   temperatureText: {
     fontSize: 56,
-    fontWeight: 'bold',
-    color: '#f0ebd8', // Light text color for temperature
+    fontWeight: "bold",
+    color: "#f0ebd8", // Light text color for temperature
   },
   infoContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 20,
   },
   statusBox: {
     borderRadius: 10,
     padding: 15,
-    width: '45%',
-    justifyContent: 'center', // Center content vertically
-    backgroundColor: '#3e5c76', // Medium blue for status boxes
+    width: "45%",
+    justifyContent: "center", // Center content vertically
+    backgroundColor: "#3e5c76", // Medium blue for status boxes
   },
   scheduleBox: {
-    backgroundColor: '#1d2d44', // Dark blue for schedule box
+    backgroundColor: "#1d2d44", // Dark blue for schedule box
     borderRadius: 10,
     padding: 15,
-    width: '45%',
+    width: "45%",
     borderWidth: 1,
     borderColor: "#3E5C76",
   },
   statusText: {
     fontSize: 14,
-    textAlign: 'center',
-    color: '#f0ebd8', // Light text color for status text
-    fontWeight: 'bold',
+    textAlign: "center",
+    color: "#f0ebd8", // Light text color for status text
+    fontWeight: "bold",
   },
   infoText: {
     fontSize: 14,
-    textAlign: 'center',
-    color: '#f0ebd8', // Light text color for info text
+    textAlign: "center",
+    color: "#f0ebd8", // Light text color for info text
   },
   dateText: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#f0ebd8', // Light text color for date text
+    fontWeight: "bold",
+    color: "#f0ebd8", // Light text color for date text
     marginBottom: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
   gradientBackground: {
     position: "absolute",

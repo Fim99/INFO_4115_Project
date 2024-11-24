@@ -7,28 +7,28 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   gridContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
     marginBottom: 10,
   },
   blockContainer: {
-    width: '48%',
+    width: "48%",
     marginBottom: 16,
   },
   blockTitle: {
     fontSize: 14,
-    color: '#fff',
-    fontWeight: 'bold',
+    color: "#fff",
+    fontWeight: "bold",
     paddingVertical: 6,
     borderWidth: 1,
     borderColor: "#3E5C76",
     borderRadius: 15,
     marginBottom: 10,
-    textAlign: 'center',
+    textAlign: "center",
   },
   energyBox: {
-    backgroundColor: "#79f982", 
+    backgroundColor: "#79f982",
     padding: 16,
     borderRadius: 20,
     alignItems: "center",
@@ -38,13 +38,13 @@ const styles = StyleSheet.create({
   },
   energyDetail: {
     fontSize: 22,
-    color: "#0d1321", 
+    color: "#0d1321",
     textAlign: "center",
     fontWeight: "bold",
     marginVertical: 4,
   },
   comparisonBox: {
-    backgroundColor: '#1d2d44', 
+    backgroundColor: "#1d2d44",
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
@@ -55,32 +55,32 @@ const styles = StyleSheet.create({
   },
   comparisonValue: {
     fontSize: 32,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     color: "#f0ebd8", // Light text color for visibility
   },
   reductionText: {
-    color: '#79f982', // Green for reduction text
+    color: "#79f982", // Green for reduction text
   },
   increaseText: {
-    color: '#e74c3c', // Red for increase text
+    color: "#e74c3c", // Red for increase text
   },
   buttonContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 20,
     left: 16,
     right: 16,
     padding: 16,
-    backgroundColor: '#151F33', // A medium blue for the button background
+    backgroundColor: "#151F33", // A medium blue for the button background
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     elevation: 2,
   },
   usageButtonText: {
-    color: '#f0ebd8', // Light text for the button
+    color: "#f0ebd8", // Light text for the button
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   gradientBackground: {
     position: "absolute",
