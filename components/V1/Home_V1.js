@@ -20,7 +20,7 @@ const getRandomHourDateTime = () => {
   const randomDate = Math.floor(Math.random() * 28) + 1;
   const randomHour = Math.floor(Math.random() * 12) + 1;
   const randomAMPM = Math.floor(Math.random() * 2) === 0 ? "AM" : "PM";
-  return `${randomDay}, ${randomMonth} ${randomDate}, ${randomHour}:00 ${randomAMPM}`;
+  return `${randomDay}, ${randomMonth} ${randomDate} \n ${randomHour}:00 ${randomAMPM}`;
 };
 
 const HomeScreen = () => {
