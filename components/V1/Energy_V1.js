@@ -81,7 +81,7 @@ const SmartACScheduling = () => {
                   },
                 ],
               }}
-              width={320} // Adjusted to fit mobile/web view
+              width={Dimensions.get("window").width - 40} // Adjusted to fit mobile/web view
               height={185}
               yAxisLabel=""
               yAxisSuffix=" kWh"
@@ -114,7 +114,6 @@ const SmartACScheduling = () => {
                 borderWidth: 1,
                 borderColor: "#b1d8fb",
                 alignSelf: "center",
-                maxWidth: 320,
               }}
               withInnerLines={true}
               withOuterLines={false}

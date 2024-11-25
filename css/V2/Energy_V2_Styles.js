@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   blockTitle: {
-    fontSize: 14,
+    fontSize: 12,
     color: "#fff",
     fontWeight: "bold",
     paddingVertical: 6,

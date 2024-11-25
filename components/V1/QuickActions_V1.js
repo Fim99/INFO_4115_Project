@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import {View, Text, TouchableOpacity, Animated,} from "react-native";
+import { View, Text, TouchableOpacity, Animated } from "react-native";
 import styles from "../../css/V1/QuickActions_V1_Styles";
 import GridBackground from "../GridBackground";
 import RefreshButton from "../Refresh_Button";
@@ -8,12 +8,13 @@ import ScreenWrapper from "../ScreenWrapper";
 const QuickActions = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [scheduledTime, setScheduledTime] = useState("");
+  const [toggleWidth, setToggleWidth] = useState(0);
   const slideAnim = useRef(new Animated.Value(0)).current;
+  const toggleRef = useRef(null);
 
-  // Set initial random date when component mounts
   useEffect(() => {
     setScheduledTime(getRandomHourDateTime());
-  }, []); // Empty dependency array means this runs once on mount
+  }, []);
 
   const toggleSwitch = () => {
     const toValue = isEnabled ? 0 : 1;
@@ -28,20 +29,7 @@ const QuickActions = () => {
 
   const getRandomHourDateTime = () => {
     const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     const randomDay = days[Math.floor(Math.random() * days.length)];
     const randomMonth = months[Math.floor(Math.random() * months.length)];
     const randomDate = Math.floor(Math.random() * 28) + 1;
@@ -54,58 +42,64 @@ const QuickActions = () => {
     setScheduledTime(getRandomHourDateTime());
   };
 
+  // Constants for toggle dimensions
+  const THUMB_WIDTH = 42;
+  const TOGGLE_PADDING = 4;
+
   return (
     <ScreenWrapper>
       <View style={styles.container}>
         <GridBackground />
         <Text style={styles.title}>Quick Actions</Text>
-        {/* Refresh Button */}
+        
         <RefreshButton onPress={RefreshButton.handleRefresh} />
 
-        {/* Custom Animated Toggle */}
-        <TouchableOpacity
-          activeOpacity={0.8}
-          onPress={toggleSwitch}
-          style={styles.toggleContainer}
-        >
-          <View
-            style={[
-              styles.toggleBackground,
-              { backgroundColor: isEnabled ? "#32CD32" : "#cc3300" },
-            ]}
+        <View style={styles.toggleContainer}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={toggleSwitch}
+            style={{ width: '80%' }}
           >
-            <Animated.View
+            <View
+              ref={toggleRef}
+              onLayout={(event) => {
+                setToggleWidth(event.nativeEvent.layout.width);
+              }}
               style={[
-                styles.thumb,
-                {
-                  transform: [
-                    {
-                      translateX: slideAnim.interpolate({
-                        inputRange: [0, 1],
-                        outputRange: [
-                          4,
-                          styles.toggleBackground.width -
-                            styles.thumb.width -
-                            4,
-                        ],
-                      }),
-                    },
-                  ],
-                },
+                styles.toggleBackground,
+                { backgroundColor: isEnabled ? "#32CD32" : "#cc3300" }
               ]}
-            />
-            <View style={styles.textContainer}>
-              <Text style={[styles.toggleText, { opacity: isEnabled ? 1 : 0 }]}>
-                ON
-              </Text>
-              <Text style={[styles.toggleText, { opacity: isEnabled ? 0 : 1 }]}>
-                OFF
-              </Text>
+            >
+              <Animated.View
+                style={[
+                  styles.thumb,
+                  {
+                    transform: [
+                      {
+                        translateX: slideAnim.interpolate({
+                          inputRange: [0, 1],
+                          outputRange: [
+                            TOGGLE_PADDING,
+                            toggleWidth - THUMB_WIDTH - TOGGLE_PADDING
+                          ],
+                        }),
+                      },
+                    ],
+                  },
+                ]}
+              />
+              <View style={styles.textContainer}>
+                <Text style={[styles.toggleText, { opacity: isEnabled ? 1 : 0 }]}>
+                  ON
+                </Text>
+                <Text style={[styles.toggleText, { opacity: isEnabled ? 0 : 1 }]}>
+                  OFF
+                </Text>
+              </View>
             </View>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        </View>
 
-        {/* Schedule Button */}
         <TouchableOpacity
           style={styles.scheduleButton}
           onPress={handleSchedulePress}
@@ -116,7 +110,6 @@ const QuickActions = () => {
           </Text>
         </TouchableOpacity>
 
-        {/* Preset Buttons */}
         <TouchableOpacity style={styles.presetButton}>
           <Text style={styles.presetText}>Cold Preset 1</Text>
           <Text style={styles.presetSubText}>

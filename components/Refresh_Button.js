@@ -1,6 +1,6 @@
 // components/RefreshButton.js
 import React from "react";
-import { TouchableOpacity, Text, StyleSheet } from "react-native";
+import { TouchableOpacity,StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
@@ -21,7 +21,7 @@ const RefreshButton = () => {
       style={styles.refreshButtonContainer}
       onPress={handleRefresh}
     >
-      <Icon name="refresh" size={24} color="#ff0000" />
+      <Icon name="refresh" size={24} color="#000" />
     </TouchableOpacity>
   );
 };
@@ -29,19 +29,9 @@ const RefreshButton = () => {
 const styles = StyleSheet.create({
   refreshButtonContainer: {
     position: "absolute",
-    top: 20,
-    right: 20,
+    top: -45,
+    right: 15,
     zIndex: 1,
-  },
-  refreshButton: {
-    padding: 5,
-    borderRadius: 5,
-    backgroundColor: "#23C4FF",
-  },
-  refreshButtonText: {
-    color: "#FFF",
-    fontSize: 20,
-    fontWeight: "bold",
   },
 });
 

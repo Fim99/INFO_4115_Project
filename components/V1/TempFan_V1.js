@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Text, View, Image } from "react-native";
+import { Text, View, Image, Dimensions} from "react-native";
 import { RadialSlider } from "react-native-radial-slider";
 import { Slider } from "@rneui/themed";
 import styles from "../../css/V1/TempFan_V1_Styles";
 import GridBackground from "../GridBackground";
 import RefreshButton from "../../components/Refresh_Button";
 import ScreenWrapper from "../ScreenWrapper";
+
+const windowWidth = Dimensions.get('window').width;
 
 const TempFan = () => {
   // Generate random initial temperature between 16 and 30
@@ -33,9 +35,9 @@ const TempFan = () => {
         {/* Refresh Button */}
         <RefreshButton onPress={RefreshButton.handleRefresh} />
         {/* Temperature Control with Radial Slider */}
-        <View style={styles.sliderContainer}>
+        <View style={styles.radialSliderContainer}>
           <RadialSlider
-            radius={125}
+            radius={windowWidth * 0.3} // Make radius responsive to screen size
             value={speed}
             min={16}
             max={30}

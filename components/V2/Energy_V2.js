@@ -95,11 +95,11 @@ const EnergyMonitoringV2 = () => {
 
         <View style={styles.gridContainer}>
           <ComparisonBlock
-            label="Today vs Yesterday"
+            label="Today vs Last Usgage"
             value={comparisons.daily}
           />
           <ComparisonBlock
-            label="Month vs Last Month"
+            label="This Month vs Last Month"
             value={comparisons.monthly}
           />
         </View>

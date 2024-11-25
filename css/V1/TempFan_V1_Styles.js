@@ -1,5 +1,7 @@
 // TempFan.styles.js
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions} from "react-native";
+
+const windowWidth = Dimensions.get('window').width;
 
 export default StyleSheet.create({
   container: {
@@ -8,8 +10,17 @@ export default StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#E6F3FF",
   },
+  radialSliderContainer: {
+    width: windowWidth * 0.8,
+    aspectRatio: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
   sliderContainer: {
     marginBottom: 20,
+    width: '80%',
+    alignSelf: 'center',
   },
   sectionTitle: {
     fontSize: 18,
@@ -38,7 +49,7 @@ export default StyleSheet.create({
     height: 30,
   },
   slider: {
-    width: 300,
+    width: "100%",
     activeColor: "#589cfb",
     inactiveColor: "#fff",
     thumbColor: "#589cfb",

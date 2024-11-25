@@ -23,10 +23,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   toggleBackground: {
-    width: 320,
+    width: '125%',
     height: 50,
     borderRadius: 25,
     justifyContent: "center",
+    alignSelf: "center",
     position: "relative",
   },
   thumb: {
